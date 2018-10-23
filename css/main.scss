@@ -1,0 +1,92 @@
+/* Reset button styles
+---------------------------------------------------------------------- */
+button#jam3-close-cookie-banner {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+/* Main banner container
+---------------------------------------------------------------------- */
+$close_button_size: 25px; //Var to change size of banner close button
+
+#jam3-cookie-banner {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  font-size: 12px;
+  width: 50%;
+  z-index: 10;
+
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+
+  &.closed {
+    display: none;
+  }
+
+  a {
+    font-weight: bold;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+  }
+
+  #jam3-close-cookie-banner {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    width: $close_button_size;
+    height: $close_button_size;
+
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      left: 7px;
+      content: ' ';
+      height: $close_button_size;
+      width: 2px;
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+
+  }
+
+}

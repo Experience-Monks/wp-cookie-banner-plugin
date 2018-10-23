@@ -1,0 +1,20 @@
+## -------- Welcome to the Jam3 Generator gitignore --------
+##
+## Please add your generator ignores ordered by topics.
+## See https://help.github.com/ignore-files/ for more about ignoring files.
+
+## Frontend
+
+# Global
+.DS_Store
+*.log*
+
+# IDEs
+/.vscode/
+.idea
+/sketch/
+
+# SASS
+config.codekit3
+/css/main.css.map
+/css/.sass-cache/

@@ -1,0 +1,76 @@
+/* Reset button styles
+---------------------------------------------------------------------- */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\000033}}
+button#jam3-close-cookie-banner {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+  /* Remove excess padding and border in Firefox 4+ */ }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000327}}
+  button#jam3-close-cookie-banner::-moz-focus-inner {
+    border: 0;
+    padding: 0; }
+
+/* Main banner container
+---------------------------------------------------------------------- */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000337}}
+#jam3-cookie-banner {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  font-size: 12px;
+  width: 50%;
+  z-index: 10;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000353}}
+  #jam3-cookie-banner.closed {
+    display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000357}}
+  #jam3-cookie-banner a {
+    font-weight: bold;
+    text-decoration: underline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000361}}
+    #jam3-cookie-banner a:hover {
+      text-decoration: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000367}}
+  #jam3-cookie-banner #jam3-close-cookie-banner {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    width: 25px;
+    height: 25px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000374}}
+    #jam3-cookie-banner #jam3-close-cookie-banner:before, #jam3-cookie-banner #jam3-close-cookie-banner:after {
+      position: absolute;
+      top: 0;
+      left: 7px;
+      content: ' ';
+      height: 25px;
+      width: 2px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000383}}
+    #jam3-cookie-banner #jam3-close-cookie-banner:before {
+      transform: rotate(45deg); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Volumes\/Mac\%20Storage\/VVV-2\/www\/wordpress-default\/public_html\/wp-content\/plugins\/jam3-cookie-banner\/css\/main\.scss}line{font-family:\0000386}}
+    #jam3-cookie-banner #jam3-close-cookie-banner:after {
+      transform: rotate(-45deg); }
+
+/*# sourceMappingURL=main.css.map */
