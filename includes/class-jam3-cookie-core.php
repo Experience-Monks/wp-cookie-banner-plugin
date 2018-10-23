@@ -137,13 +137,13 @@ class Jam3_Cookie_Core {
 		$plugin_css_file_path = null;
 
 		//Production assets
-		$plugin_js_file_path  = JAM3_COOKIE_PLUGIN_BASE_URL . 'js/main.js';
+		$plugin_js_file_path  = JAM3_COOKIE_PLUGIN_BASE_URL . 'js/main-min.js';
 		$plugin_css_file_path = JAM3_COOKIE_PLUGIN_BASE_URL . 'css/main.css';
 
 		if ( defined( 'WP_DEBUG' ) && ( true === WP_DEBUG ) ) {
 
 			//Dev assets
-			$plugin_js_file_path = JAM3_COOKIE_PLUGIN_BASE_URL . 'js/main-min.js';
+			$plugin_js_file_path = JAM3_COOKIE_PLUGIN_BASE_URL . 'js/main.js';
 
 		}
 
