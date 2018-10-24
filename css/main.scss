@@ -1,3 +1,32 @@
+/* Breakpoint mixin
+---------------------------------------------------------------------- */
+$breakpoints: (
+        'small':  479px,
+        'medium': 749px,
+        'large':  969px,
+        'x-large':  1169px
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Hugo Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin respond-to($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+
+    // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
 /* Reset button styles
 ---------------------------------------------------------------------- */
 button#jam3-close-cookie-banner {
@@ -32,23 +61,32 @@ button#jam3-close-cookie-banner {
 
 /* Main banner container
 ---------------------------------------------------------------------- */
-$close_button_size: 25px; //Var to change size of banner close button
+$close_button_size: 20px; //Var to change size of banner close button
+$close_button_size_medium: 17px; //Var to change size of banner close button
 
 #jam3-cookie-banner {
   background-color: #ffffff;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  font-size: 12px;
-  width: 50%;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 20px 60px 20px 20px;
+  text-align: left;
+  font-size: 10px;
+  line-height: 17px;
+  width: 90%;
   z-index: 10;
 
   position: fixed;
-  bottom: 50px;
+  bottom: 20px;
   left: 50%;
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
+
+  @include respond-to('medium') {
+    padding: 25px 60px;
+    text-align: center;
+    max-width: 590px;
+  }
 
   &.closed {
     display: none;
@@ -65,11 +103,26 @@ $close_button_size: 25px; //Var to change size of banner close button
   }
 
   #jam3-close-cookie-banner {
-    position: absolute;
-    right: 5px;
-    top: 10px;
     width: $close_button_size;
     height: $close_button_size;
+
+    position: absolute;
+    right: 20px;
+    top: 50%;
+
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    @include respond-to('medium') {
+      top: 10px;
+      right: 10px;
+      -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+      transform: translateY(0);
+      width: $close_button_size_medium;
+      height: $close_button_size_medium;
+    }
 
     &:before, &:after {
       position: absolute;
@@ -78,6 +131,11 @@ $close_button_size: 25px; //Var to change size of banner close button
       content: ' ';
       height: $close_button_size;
       width: 2px;
+
+      @include respond-to('medium') {
+        height: $close_button_size_medium;
+      }
+
     }
 
     &:before {
