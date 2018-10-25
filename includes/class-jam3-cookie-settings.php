@@ -64,6 +64,27 @@ class Jam3_Cookie_Settings extends Jam3_Cookie_Core {
 	}
 
 	/**
+	* is_banner_active'
+	*
+	* Helper to dectect if banner is set to enabled (active)
+	*
+	* @return bool
+	* @access public
+	* @author Ben Moody
+	*/
+	public static function is_banner_active() {
+
+		//vars
+		$option = self::get_option( 'jam3_cookie_status' );
+
+		if ( 'enabled' === $option ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * get_option
 	 *
 	 * Static helper method, used in front end template to get plugin options,
@@ -138,6 +159,19 @@ class Jam3_Cookie_Settings extends Jam3_Cookie_Core {
 	 * @author Ben Moody
 	 */
 	public function register_settings() {
+
+		//Enable control
+		register_setting(
+			$this->option_group,
+			'jam3_cookie_status',
+			array(
+				'type'              => 'string',
+				'description'       => esc_html_x( 'Enabled or disable banner', 'register setting description', 'jam3_cookie_banner' ),
+				'sanitize_callback' => 'sanitize_text_field',
+				'show_in_rest'      => false,
+				'default'           => 'disabled',
+			)
+		);
 
 		//Theme hex code
 		register_setting(

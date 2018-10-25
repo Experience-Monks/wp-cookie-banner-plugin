@@ -33,64 +33,13 @@ class Jam3_Cookie_Core {
 		 * We have to do this via JS due to caching such as WP VIP Batcache whihc prevents server side detection of cookies
 		 * If the cookie is not detected, then we load the plugin CSS and JS assets via Javascript
 		 */
-		$this->maybe_render_banner_detection_script();
-
-	}
-
-	/**
-	 * maybe_render_banner_detection_script
-	 *
-	 * @CALLED BY __construct()
-	 *
-	 * Detect if we should render the inline JS to initate the cookie banner on
-	 *     front end
-	 *
-	 * @access private
-	 * @author Ben Moody
-	 */
-	private function maybe_render_banner_detection_script() {
-
-		//Is the cookie banner going to render?
-		if ( false === self::maybe_render_cookie_banner() ) {
-			return;
-		}
-
-		//Render inline initialize script
-		add_action(
-			'wp_footer',
+		add_action( 'init',
 			array(
 				$this,
-				'render_inline_initialize_script',
+				'maybe_render_banner_detection_script',
 			)
 		);
 
-		//Render the banner html template into footer
-		add_action(
-			'wp_footer',
-			array(
-				$this,
-				'render_banner_template_html',
-			)
-		);
-
-		return;
-	}
-
-	/**
-	 * maybe_render_cookie_banner
-	 *
-	 * Helper to detect if cookie banner inline code should be rendered
-	 *
-	 * @access public
-	 * @author Ben Moody
-	 */
-	public static function maybe_render_cookie_banner() {
-
-		if ( is_user_logged_in() ) {
-			return false;
-		}
-
-		return true;
 	}
 
 	/**
@@ -179,7 +128,7 @@ class Jam3_Cookie_Core {
                 this.init = function () {
 
                     //vars
-                    var theBannerContainer = document.getElementById( 'jam3-cookie-banner' );
+                    var theBannerContainer = document.getElementById('jam3-cookie-banner');
 
                     //Cache cookiename
                     this.pluginCookieName = '<?php echo esc_attr( self::$plugin_closed_cookie_name ); ?>';
@@ -200,7 +149,7 @@ class Jam3_Cookie_Core {
 
                         //remove banner from DOM
                         theBannerContainer.remove();
-					}
+                    }
 
                 };
 
@@ -296,7 +245,9 @@ class Jam3_Cookie_Core {
 
             //Create instance of class to get things started
             var Jam3InitCookieBanner = new Jam3InitCookieBanner;
-            window.onload = function () { Jam3InitCookieBanner.init(); }
+            window.onload = function () {
+                Jam3InitCookieBanner.init();
+            }
             //]]>
 		</script>
 		<?php
@@ -314,6 +265,67 @@ class Jam3_Cookie_Core {
 		load_plugin_textdomain( JAM3_COOKIE_TEXT_DOMAIN, false, '/jam3-cookie-banner/languages/' );
 
 		return;
+	}
+
+	/**
+	 * maybe_render_banner_detection_script
+	 *
+	 * @CALLED BY __construct()
+	 *
+	 * Detect if we should render the inline JS to initate the cookie banner on
+	 *     front end
+	 *
+	 * @access private
+	 * @author Ben Moody
+	 */
+	public function maybe_render_banner_detection_script() {
+
+		//Is the cookie banner going to render?
+		if ( false === self::maybe_render_cookie_banner() ) {
+			return;
+		}
+
+		//Render inline initialize script
+		add_action(
+			'wp_footer',
+			array(
+				$this,
+				'render_inline_initialize_script',
+			)
+		);
+
+		//Render the banner html template into footer
+		add_action(
+			'wp_footer',
+			array(
+				$this,
+				'render_banner_template_html',
+			)
+		);
+
+		return;
+	}
+
+	/**
+	 * maybe_render_cookie_banner
+	 *
+	 * Helper to detect if cookie banner inline code should be rendered
+	 *
+	 * @access public
+	 * @author Ben Moody
+	 */
+	public static function maybe_render_cookie_banner() {
+
+		if ( is_user_logged_in() ) {
+			return false;
+		}
+
+		//Is banner active
+		if ( false === Jam3_Cookie_Settings::is_banner_active() ) {
+			return false;
+		}
+
+		return true;
 	}
 
 }
