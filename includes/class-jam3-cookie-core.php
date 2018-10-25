@@ -316,6 +316,12 @@ class Jam3_Cookie_Core {
 	 */
 	public static function maybe_render_cookie_banner() {
 
+		//Allow devs to override banner rendering via filter
+		$disable_banner_override = apply_filters( 'jam3_cookie_disable_override', false );
+		if( true === $disable_banner_override ) {
+			return false;
+		}
+
 		if ( is_user_logged_in() ) {
 			return false;
 		}
