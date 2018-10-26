@@ -73,7 +73,7 @@ $close_button_size_medium: 17px; //Var to change size of banner close button
   font-size: 12px;
   line-height: 17px;
   width: 90%;
-  z-index: 10;
+  z-index: 9999;
 
   position: fixed;
   bottom: 20px;
@@ -103,6 +103,7 @@ $close_button_size_medium: 17px; //Var to change size of banner close button
   }
 
   #jam3-close-cookie-banner {
+    cursor: pointer;
     width: $close_button_size;
     height: $close_button_size;
 
