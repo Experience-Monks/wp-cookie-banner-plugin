@@ -64,14 +64,14 @@ class Jam3_Cookie_Settings extends Jam3_Cookie_Core {
 	}
 
 	/**
-	* is_banner_active'
-	*
-	* Helper to dectect if banner is set to enabled (active)
-	*
-	* @return bool
-	* @access public
-	* @author Ben Moody
-	*/
+	 * is_banner_active'
+	 *
+	 * Helper to dectect if banner is set to enabled (active)
+	 *
+	 * @return bool
+	 * @access public
+	 * @author Ben Moody
+	 */
 	public static function is_banner_active() {
 
 		//vars
@@ -227,6 +227,11 @@ class Jam3_Cookie_Settings extends Jam3_Cookie_Core {
 		$option_group  = $this->option_group;
 
 		$template_path = jam3_cookie_get_template_path( 'settings', 'form' );
+
+		//jam3_cookie_get_template_path performs validate_file() check
+		if ( is_wp_error( $template_path ) ) {
+			return;
+		}
 
 		require_once( $template_path );
 

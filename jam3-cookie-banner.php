@@ -125,5 +125,17 @@ function jam3_cookie_get_template_path( $slug, $template_name ) {
 
 	}
 
+	//Check if a valid path for include
+	if ( validate_file( $path ) > 0 ) {
+
+		//Failed path validation
+		return new WP_Error(
+			'jam3_cookie_include_file',
+			'File include path failed path validation',
+			$path
+		);
+
+	}
+
 	return $path;
 }
