@@ -136,13 +136,13 @@ class Jam3_Cookie_Core {
                     var theBannerContainer = document.getElementById('jam3-cookie-banner');
 
                     //Cache cookiename
-                    this.pluginCookieName = '<?php echo esc_attr( self::$plugin_closed_cookie_name ); ?>';
+                    this.pluginCookieName = <?php echo wp_json_encode( self::$plugin_closed_cookie_name ); ?>;
 
                     //Cache if this is https
-                    this.isHttps = '<?php
+                    this.isHttps = <?php
 						$is_https = ( self::$is_ssl ) ? 'true' : 'false';
-						echo esc_attr( $is_https );
-						?>';
+						echo wp_json_encode( $is_https );
+						?>;
 
                     //Has user already closed banner?
                     if (true === this.maybeRenderBanner()) {
@@ -169,8 +169,8 @@ class Jam3_Cookie_Core {
                 this.loadAssets = function () {
 
                     //vars
-                    var pluginJSFile = '<?php echo esc_url( $plugin_js_file_path ); ?>';
-                    var pluginCSSFile = '<?php echo esc_url( $plugin_css_file_path ); ?>';
+                    var pluginJSFile = <?php echo wp_json_encode( $plugin_js_file_path ); ?>;
+                    var pluginCSSFile = <?php echo wp_json_encode( $plugin_css_file_path ); ?>;
 
                     //Load JS file
                     this.loadJsCssFile(pluginJSFile, 'js');
