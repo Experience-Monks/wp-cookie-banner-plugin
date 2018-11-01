@@ -62,6 +62,11 @@ class Jam3_Cookie_Core {
 
 		$template_path = jam3_cookie_get_template_path( 'part', 'banner' );
 
+		//jam3_cookie_get_template_path performs validate_file() check
+		if ( is_wp_error( $template_path ) ) {
+			return;
+		}
+
 		require_once( $template_path );
 
 		return;
