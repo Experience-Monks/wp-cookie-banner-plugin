@@ -23,8 +23,7 @@ var Jam3CookieBanner = function () {
     this.init = function () {
 
         //vars
-        var closeButton = document.getElementById( 'jam3-close-cookie-banner' );
-        var theBannerContainer = document.getElementById( 'jam3-cookie-banner' );
+        var theBannerContainer = document.getElementById('jam3-cookie-banner');
 
         //Maybe show banner once page loaded
         if (true === Jam3InitCookieBanner.maybeRenderBanner()) {
@@ -34,12 +33,11 @@ var Jam3CookieBanner = function () {
 
         }
 
-        //Listen for banner close click
-        if( typeof closeButton !== 'undefined' ) {
-
-            closeButton.addEventListener( 'click', this.closeBannerListener );
-
-        }
+        //monitoring events to close cookie banner and trigger event
+        window.onscroll = this.closeBannerListener;
+        window.onclick = this.closeBannerListener;
+        window.oncontextmenu = this.closeBannerListener;
+        window.onkeyup = this.closeBannerListener;
 
     };
 
@@ -56,15 +54,21 @@ var Jam3CookieBanner = function () {
     this.closeBannerListener = function () {
 
         //vars
-        var theBannerContainer = document.getElementById( 'jam3-cookie-banner' );
+        var theBannerContainer = document.getElementById('jam3-cookie-banner');
 
-        //Add closed class to element
-        theBannerContainer.classList.add( 'closed' );
+        if (theBannerContainer) {
+            //Add closed class to element
+            theBannerContainer.classList.add('closed');
+            theBannerContainer.parentNode.removeChild(theBannerContainer);
+            theBannerContainer = null;
 
-        //Set cookie to log banner as closed
-        self.logBannerAsClosed();
+            //Set cookie to log banner as closed
+            self.logBannerAsClosed();
 
-        return false;
+            var startTrackingEvent = new Event('cookieBannerStartTracking');
+            document.dispatchEvent(startTrackingEvent);
+        }
+
     };
 
     /**
@@ -81,7 +85,7 @@ var Jam3CookieBanner = function () {
         //vars
         var cookieName = Jam3InitCookieBanner.pluginCookieName;
 
-        this.setCookie( cookieName, 'true', 365 );
+        this.setCookie(cookieName, 'true', 365);
 
     };
 
@@ -95,13 +99,13 @@ var Jam3CookieBanner = function () {
      */
     this.setCookie = function (cname, cvalue, exdays) {
         var d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        var expires = "expires="+ d.toUTCString();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
 
         var cookieCommand = cname + "=" + cvalue + ";" + expires + ";path=/;";
 
         //Detect if cookie should be secure or not
-        if( 'true' === Jam3InitCookieBanner.isHttps ) {
+        if ('true' === Jam3InitCookieBanner.isHttps) {
             cookieCommand = cookieCommand + 'secure;';
         }
 

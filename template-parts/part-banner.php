@@ -9,7 +9,6 @@
 		<!-- The banner content !-->
 		<?php echo wp_kses_post( Jam3_Cookie_Settings::get_option( 'jam3_cookie_content' ) ); ?>
 
-		<button id="jam3-close-cookie-banner"></button>
 	</div>
 
 	<!-- Banner dynamic theme elements !-->
