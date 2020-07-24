@@ -35,10 +35,38 @@ var Jam3CookieBanner = function () {
 
         //monitoring events to close cookie banner and trigger event
         window.onscroll = this.closeBannerListener;
-        window.onclick = this.closeBannerListener;
+        window.onclick = this.closeBannerClickListener;
         window.oncontextmenu = this.closeBannerListener;
         window.onkeyup = this.closeBannerListener;
 
+    };
+
+  /**
+   * closeBannerClickListener
+   *
+   * @CALLED BY /ACTION '#jam3-close-cookie-banner' CLICK
+   *
+   * Detect if click was on/inside the cookie banner DOM element, if so ignore close action
+   *
+   * @access public
+   * @author Ben Moody
+   */
+    this.closeBannerClickListener = function (event) {
+
+      var bannerElement = document.getElementById('jam3-cookie-banner');
+      var targetElement = event.target; // clicked element
+
+      if (targetElement === bannerElement) {
+        // This is a click inside. Do nothing, just return.
+        return;
+      }
+
+      if (targetElement.offsetParent === bannerElement) {
+        // This is a click inside. Do nothing, just return.
+        return;
+      }
+
+      self.closeBannerListener();
     };
 
     /**
@@ -57,17 +85,29 @@ var Jam3CookieBanner = function () {
         var theBannerContainer = document.getElementById('jam3-cookie-banner');
 
         if (theBannerContainer) {
-            //Add closed class to element
-            theBannerContainer.classList.add('closed');
-            theBannerContainer.parentNode.removeChild(theBannerContainer);
-            theBannerContainer = null;
 
-            //Set cookie to log banner as closed
-            self.logBannerAsClosed();
+          self.closeTheBanner();
 
             var startTrackingEvent = new Event('cookieBannerStartTracking');
             document.dispatchEvent(startTrackingEvent);
         }
+
+    };
+
+    this.closeTheBanner = function () {
+
+      //vars
+      var theBannerContainer = document.getElementById('jam3-cookie-banner');
+
+      if (theBannerContainer) {
+        //Add closed class to element
+        theBannerContainer.classList.add('closed');
+        theBannerContainer.parentNode.removeChild(theBannerContainer);
+        theBannerContainer = null;
+
+        //Set cookie to log banner as closed
+        self.logBannerAsClosed();
+      }
 
     };
 
