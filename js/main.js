@@ -36,7 +36,7 @@ var Jam3CookieBanner = function () {
         //monitoring events to close cookie banner and trigger event
         window.onscroll = this.closeBannerListener;
         window.onclick = this.closeBannerClickListener;
-        window.oncontextmenu = this.closeBannerListener;
+        window.oncontextmenu = this.closeBannerClickListener;
         window.onkeyup = this.closeBannerListener;
 
     };
